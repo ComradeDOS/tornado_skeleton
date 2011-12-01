@@ -4,6 +4,8 @@
 # you can do it in local_settings.py
 debug = False
 logging = 'error'
+address = '0.0.0.0'
+port = 8000
 
 try:
     from local_settings import *
