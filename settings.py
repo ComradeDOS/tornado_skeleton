@@ -7,7 +7,9 @@ logging = 'error'
 address = '0.0.0.0'
 port = 8000
 static_path = 'static'
+static_url_prefix = '/static/'
 template_path = 'views'
+gzip = False
 
 try:
     from local_settings import *

@@ -12,12 +12,18 @@ class TornadoApplication(Application):
     def __init__(self):
         handlers = urlpatterns
         settings = {}
-        if options.debug:
-            settings['debug']  = True
+        settings['debug'] = options.debug
+
         if options.static_path and os.path.exists(
                 os.path.abspath(options.static_path)):
             settings['static_path'] = os.path.abspath(options.static_path)
+
+        settings['static_url_prefix'] = options.static_url_prefix
+
         if options.template_path and os.path.exists(
                 os.path.abspath(options.template_path)):
             settings['template_path'] = os.path.abspath(options.template_path)
+
+        settings['gzip'] = options.gzip
+
         super(TornadoApplication, self).__init__(handlers, **settings)

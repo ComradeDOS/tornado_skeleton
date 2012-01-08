@@ -20,8 +20,14 @@ define('port', type=int, default=8000,
 
 define('static_path', type=str, default='static',
        help='path to the static content')
+define('static_url_prefix', type=str, default='/static/',
+       help='url prefix for static content')
+
 define('template_path', type=str, default='views',
        help='path to the directory with templates')
+
+define('gzip', type=bool, default=False,
+       help='use gzip compression for response')
 
 log = logging.getLogger(__name__)
 
