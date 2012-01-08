@@ -1,1 +1,3 @@
 The skeleton of a web application on tornado.
+This simple application can run in two ways: as standalone web-server and as web-server behind reverse-proxy server.
+2nd way is more peferable.
