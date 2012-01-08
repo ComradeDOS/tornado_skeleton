@@ -6,6 +6,7 @@ debug = False
 logging = 'error'
 address = '0.0.0.0'
 port = 8000
+static_path = 'static'
 
 try:
     from local_settings import *

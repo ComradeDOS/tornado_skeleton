@@ -18,6 +18,9 @@ define('address', type=str, default='0.0.0.0',
 define('port', type=int, default=8000,
        help='run application on given port')
 
+define('static_path', type=str, default='static',
+       help='path to the static content')
+
 log = logging.getLogger(__name__)
 
 
