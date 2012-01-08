@@ -20,6 +20,8 @@ define('port', type=int, default=8000,
 
 define('static_path', type=str, default='static',
        help='path to the static content')
+define('template_path', type=str, default='views',
+       help='path to the directory with templates')
 
 log = logging.getLogger(__name__)
 

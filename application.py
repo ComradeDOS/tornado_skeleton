@@ -17,4 +17,7 @@ class TornadoApplication(Application):
         if options.static_path and os.path.exists(
                 os.path.abspath(options.static_path)):
             settings['static_path'] = os.path.abspath(options.static_path)
+        if options.template_path and os.path.exists(
+                os.path.abspath(options.template_path)):
+            settings['template_path'] = os.path.abspath(options.template_path)
         super(TornadoApplication, self).__init__(handlers, **settings)
