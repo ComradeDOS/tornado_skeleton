@@ -29,32 +29,35 @@ define('template_path', type=str, default='views',
 define('gzip', type=bool, default=False,
        help='use gzip compression for response')
 
+define('certfile', type=str, default='',
+       help='path to the certificate')
+define('keyfile', type=str, default='',
+       help='path to the keyfile')
+
 log = logging.getLogger(__name__)
-
-
-def run_debug_server():
-    log.debug('Run application in debug mode on %s:%s.' % (options.address,
-                                                           options.port))
-    HTTPServer(app()).listen(options.port, options.address)
-    IOLoop.instance().start()
-
-def run_normal_server():
-    log.debug('Run application in normal mode on %s:%s.' % (options.address,
-                                                            options.port))
-    server = HTTPServer(app())
-    server.bind(options.port, options.address)
-    server.start(0)
-    IOLoop.instance().start()
 
 def main():
     if os.path.exists('settings.py'):
         parse_config_file('settings.py')
     parse_command_line()
+    ssl_options = {}
+    if (options.certfile and options.keyfile) and (os.path.exists(
+            os.path.abspath(options.certfile)) and os.path.exists(
+            os.path.abspath(options.keyfile))):
+        ssl_options['certfile'] = os.path.abspath(options.certfile)
+        ssl_options['keyfile'] = os.path.abspath(options.keyfile)
+    server = HTTPServer(app(), ssl_options=ssl_options or None)
     if options.debug:
         options.address = '127.0.0.1'
-        run_debug_server()
+        log.debug('Run application in debug mode on %s:%s.' % (options.address,
+                                                               options.port))
+        server.listen(options.port, options.address)
     else:
-        run_normal_server()
+        log.debug('Run application in normal mode on %s:%s.' % (options.address,
+                                                                options.port))
+        server.bind(options.port, options.address)
+        server.start(0)
+    IOLoop.instance().start()
 
 if __name__ == '__main__':
     try:

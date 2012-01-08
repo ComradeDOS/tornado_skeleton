@@ -11,6 +11,12 @@ static_url_prefix = '/static/'
 template_path = 'views'
 gzip = False
 
+# If you need handle HTTPS traffic uncomment next two lines and edit it to
+# contain the correct path for the files the certificate and private key
+# NOTE: keyfile must not be encrypted!
+# certfile = 'server.crt'
+# keyfile = 'server.pem'
+
 try:
     from local_settings import *
 except ImportError:
