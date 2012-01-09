@@ -29,10 +29,8 @@ define('template_path', type=str, default='views',
 define('gzip', type=bool, default=False,
        help='use gzip compression for response')
 
-define('certfile', type=str, default='',
-       help='path to the certificate')
-define('keyfile', type=str, default='',
-       help='path to the keyfile')
+define('certfile', type=str, default='', help='path to the certificate')
+define('keyfile', type=str, default='', help='path to the keyfile')
 
 log = logging.getLogger(__name__)
 
