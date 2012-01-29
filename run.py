@@ -35,10 +35,13 @@ define('keyfile', type=str, default='', help='path to the keyfile')
 log = logging.getLogger(__name__)
 
 def main():
+    # We have settings?
     if os.path.exists('settings.py'):
         parse_config_file('settings.py')
+    # What about command line args?
     parse_command_line()
     ssl_options = {}
+    # Check SSL options
     if (options.certfile and options.keyfile) and (os.path.exists(
             os.path.abspath(options.certfile)) and os.path.exists(
             os.path.abspath(options.keyfile))):
@@ -65,3 +68,5 @@ if __name__ == '__main__':
         IOLoop.instance().stop()
         log.debug('Freeing resources.')
         IOLoop.instance().close()
+    except Exception, exc:
+        log.error(exc)
